@@ -1,0 +1,72 @@
+:root{
+    --achivments-color: #7ca5ba;
+    --achivments-bg: #dadfe1;
+
+}
+.achivments{
+    list-style-type: none;
+    counter-reset: cnt 0;
+
+}
+.achivments-item{
+    display:inline-block;
+    position: relative;
+    width: 100px;
+    margin-bottom: 2px;
+    margin-right: 2px;
+
+}
+.achivments-item:before{
+    display:block;
+    position: absolute;
+    content: counter(cnt);
+    width:33px;
+    height:33px;
+    border: 5px solid var(--achivments-color);
+    border-radius: 50%;
+    right: -2px;
+    bottom:-2px;
+    z-index: -1;
+
+}
+
+.achivments-item:after{
+
+    display:block;
+    position: absolute;
+
+
+    counter-increment: cnt;
+    content: counter(cnt);
+    color: var(--achivments-color);
+    background-color: var(--achivments-bg);
+    text-align: center;
+    line-height:33px;
+    width:33px;
+    height:33px;
+
+    border-radius: 50%;
+    right: 3px;
+    bottom:3px;
+    font-family: sans-serif;
+
+
+
+
+}
+
+.achivments-item-image{
+    overflow: hidden;
+    background-color: var(--achivments-bg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+
+    display:block;
+    width:90px;
+    height:90px;
+    border-radius: 50% 50%;
+    border: 5px solid var(--achivments-color);
+    background-blend-mode: multiply;
+}

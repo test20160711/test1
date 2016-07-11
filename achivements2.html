@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="achivement2.css">
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var submit=document.querySelector('.apply');
+            var image=document.querySelector('.image');
+            console.log(submit);
+            submit.addEventListener('click',function(event){
+                var bgcolor=document.querySelector('.bgcolor');
+                var color=document.querySelector('.color');
+
+                document.querySelector(".achivments").style.setProperty("--achivments-color", color.value);
+                document.querySelector(".achivments").style.setProperty("--achivments-bg", bgcolor.value);
+            });
+            image.addEventListener('change',function(event){
+                var reader = new FileReader();
+                reader.onload = function(){
+                    var dataURL = reader.result;
+                    var achivements = document.querySelector('.achivments');
+                    var prototype=achivements.dataset['prototype'];
+                    var parser=new DOMParser();
+                    var img=parser.parseFromString(prototype, "text/html");
+                    var s=img.querySelector('.achivments-item-image');
+                    s.style.backgroundImage="url("+dataURL+")";
+
+                    //output.src = dataURL;
+                    achivements.appendChild(img.body.children[0]);
+                };
+                var url=reader.readAsDataURL(image.files[0]);
+                console.log(url)
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="dashboard">
+        <label>Background color: <input type="color" placeholder="bgcolor" class="bgcolor"></label>
+        <label>Foreground color: <input type="color" placeholder="color" class="color"></label>
+        <input type="button" class="apply" value="Apply">
+        <br>
+        <input type="file" accept="image/*" class="image">
+
+    </div>
+    <ol class="achivments" data-prototype='<li class="achivments-item"><i style="background-image: url(images/achivement2.png)" class="achivments-item-image"></i><div class="achivments-item-counter"></div></li>'>
+        <li class="achivments-item"><i style="background-image: url(images/151.jpg)" class="achivments-item-image"></i><div class="achivments-item-counter"></div></li>
+        <li class="achivments-item"><i style="background-image: url(images/3376e7278d0262f8ddb732bca7c02ac0.jpg)" class="achivments-item-image"></i><div class="achivments-item-counter"></div></li>
+        <li class="achivments-item"><i style="background-image: url(images/achivement2.png)" class="achivments-item-image"></i><div class="achivments-item-counter"></div></li>
+        <li class="achivments-item"><i style="background-image: url(images/achivement3.png)" class="achivments-item-image"></i><div class="achivments-item-counter"></div></li>
+    </ol>
+
+
+</body>
+</html>
